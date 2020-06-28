@@ -1,4 +1,5 @@
 import React from 'react';
+import './styles/App.css';
 
 class App extends React.Component{
   
@@ -20,15 +21,15 @@ class App extends React.Component{
       ]
     };
     this.renderTodoItems = this.renderTodoItems.bind(this);
+    this.renderAddButton = this.renderAddButton.bind(this);
   }
   
   renderTodoItems() {
-    console.log(this.state);
     const itemComponents = this.state.items.map(item => {
       return(
-        <div>
+        <div className='item'>
           <input type='checkbox' />
-          <h1>{ item.text }</h1>
+          <h2>{ item.text }</h2>
           <button>DEL</button>
         </div>
       );
@@ -39,13 +40,21 @@ class App extends React.Component{
       </div>
     );
   }
+  
+  renderAddButton() {
+    return(
+      <div className='add'>
+        <button>+</button>
+      </div>
+    );
+  }
 
   render() {
     return(
       <div>
         <h1>Todo List</h1>
         <this.renderTodoItems />
-        <button>+</button>
+        <this.renderAddButton />
       </div>
     );
   }

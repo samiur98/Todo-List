@@ -1,0 +1,86 @@
+
+body {
+    background-color: skyblue;
+}
+h1{
+    color: white;
+    text-align: center;  
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 90px;
+}
+
+button{
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    border: 2px solid white;
+    background-color: white;
+    color: skyblue;
+    size: 40px;
+}
+
+button:hover{
+    background-color: tomato;
+    color: white;
+}
+
+button:active{
+    background-color: white;
+    color: skyblue;
+}
+
+.item{
+    margin: auto;
+    width: 50%;
+    border: 5px solid white;
+    border-radius: 7px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr 14fr 4fr;
+    grid-column-start: 3;
+    grid-row-start: 3;
+    padding: 1em;
+    grid-column-gap: 5px;
+    background-color: skyblue;
+}
+
+.item h2{
+    color: darkslategrey;
+    background-color: white;
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    font-size: 25px;
+    size: 20px;
+    border: 2px solid white;
+    border-radius: 5px;
+}
+
+.item input[type="checkbox"]{
+    margin: auto;
+    width: 50%;
+    border: 3px solid white;
+    padding: 10px;
+    width: 30px; 
+    height: 30px;
+}
+
+.item input[type="checkbox"]:active{
+    background-color: tomato;
+}
+
+.item button{
+    padding: 5px;
+    border-radius: 4px;
+}
+.add {
+    text-align: center;
+}
+.add button{
+    position: relative;
+    top: 20px;
+    float: inline-end;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 90px;
+    width: 150px;
+    border-radius: 12px;
+}
