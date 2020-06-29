@@ -7,14 +7,15 @@ class App extends React.Component{
     super();
     this.state = {
       idCounter: 0,
+      textArea: '',
       items: [
         {
-        id: 1,
+        id: 111,
         text: 'test',
         checked: false
         },
         {
-          id: 2,
+          id: 2222,
           text: 'Sam smith is amazing',
           checked: true
         }
@@ -24,6 +25,9 @@ class App extends React.Component{
     this.renderTextArea = this.renderTextArea.bind(this);
     this.renderAddButton = this.renderAddButton.bind(this);
     this.onCheck = this.onCheck.bind(this);
+    this.onType = this.onType.bind(this);
+    this.onAdd = this.onAdd.bind(this);
+    this.onDelete = this.onDelete.bind(this);
   }
   
   getItemStyle(checked) {
@@ -37,9 +41,19 @@ class App extends React.Component{
     }
   }
 
+  onType(event) {
+    const newTextArea = event.target.value;
+    this.setState(prevState => {
+      return {
+        idCounter: prevState.idCounter,
+        textArea: newTextArea,
+        items: prevState.items
+      }
+    });
+  }
+
   onCheck(id) {
     const newItems = [];
-
     for(let i = 0; i < this.state.items.length; i++) {
       if(this.state.items[i].id === id) {
         const newItem = {
@@ -55,7 +69,45 @@ class App extends React.Component{
 
     this.setState(prevState => {
       return {
-        idCounter: prevState.idCounter, 
+        idCounter: prevState.idCounter,
+        textArea: prevState.textArea, 
+        items: newItems
+      }
+    });
+  }
+
+  onAdd() {
+    const newID = this.state.idCounter + 1;
+    const newItems = this.state.items;
+    const newItem = {
+      id: newID,
+      text: this.state.textArea,
+      checked: false
+    };
+    newItems.push(newItem);
+
+    this.setState(prevState => {
+      return {
+        idCounter: prevState.idCounter + 1,
+        textArea: prevState.textArea,
+        items: newItems
+      };
+    });
+  }
+
+  onDelete(id) {
+    const newItems = [];
+
+    for(let i = 0; i < this.state.items.length; i++) {
+      if(id !== this.state.items[i].id) {
+        newItems.push(this.state.items[i]);
+      }
+    }
+
+    this.setState(prevState => {
+      return {
+        idCounter: prevState.idCounter,
+        text: prevState.textArea,
         items: newItems
       }
     });
@@ -72,7 +124,7 @@ class App extends React.Component{
           onChange = { () => this.onCheck(item.id) } 
           />
           <h2 style={ itemStyle }>{ item.text }</h2>
-          <button>DEL</button>
+          <button onClick={() => this.onDelete(item.id)}>DEL</button>
         </div>
       );
     });
@@ -84,9 +136,10 @@ class App extends React.Component{
   }
   
   renderTextArea() {
+    const placeholderText = 'Add New Item';
     return(
       <div>
-        <textarea></textarea>
+        <textarea placeholder={placeholderText} onChange={ this.onType }></textarea>
       </div>
     );
   }
@@ -94,7 +147,7 @@ class App extends React.Component{
   renderAddButton() {
     return(
       <div className='add'>
-        <button>+</button>
+        <button onClick={() => this.onAdd() }>+</button>
       </div>
     );
   }
