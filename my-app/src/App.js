@@ -8,18 +8,7 @@ class App extends React.Component{
     this.state = {
       idCounter: 0,
       textArea: '',
-      items: [
-        {
-        id: 111,
-        text: 'test',
-        checked: false
-        },
-        {
-          id: 2222,
-          text: 'Sam smith is amazing',
-          checked: true
-        }
-      ]
+      items: []
     };
     this.renderTodoItems = this.renderTodoItems.bind(this);
     this.renderTextArea = this.renderTextArea.bind(this);
@@ -77,6 +66,9 @@ class App extends React.Component{
   }
 
   onAdd() {
+    if(this.state.textArea.length <= 0) {
+      return;
+    }
     const newID = this.state.idCounter + 1;
     const newItems = this.state.items;
     const newItem = {
@@ -117,7 +109,7 @@ class App extends React.Component{
     const itemComponents = this.state.items.map(item => {
       const itemStyle = this.getItemStyle(item.checked);
       return(
-        <div className='item'>
+        <div className='item' key={item.id}>
           <input 
           type='checkbox'
           checked = { item.checked }
